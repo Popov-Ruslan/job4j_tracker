@@ -34,15 +34,36 @@ public class Tracker {
         return Arrays.copyOf(rst, quantity);
     }
 
-    public Item findById(int id) {
-        Item rsl = null;
+    /**
+     * приватный, т.к. используется только внутри системы
+     * @param id - уникальный id элемента, который требуется найти
+     * @return индекс в массиве элемента с заданным id, или -1, если элемент
+     * не найден
+     */
+    private int indexOf(int id) {
+        int rst = -1;
         for (int index = 0; index < size; index++) {
-            Item item = items[index];
-            if (item.getId() == id) {
-                rsl = item;
+            if (items[index].getId() == id) {
+                rst = index;
                 break;
             }
         }
-        return rsl;
+        return rst;
+    }
+
+    public Item findById(int id) {
+        int index = indexOf(id);
+        return index != -1 ? items[index] : null;
+    }
+
+    public boolean replace(int id, Item item) {
+        boolean rst = false;
+        int index = indexOf(id);
+        if (index != -1) {
+            items[index] = item;
+            item.setId(id);
+            rst = true;
+        }
+        return rst;
     }
 }
