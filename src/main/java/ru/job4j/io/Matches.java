@@ -13,24 +13,18 @@ public class Matches {
                 2 игрока тянут спички от 1 до 3 по очереди.
                 Побеждает тот, кто вытянул спички последним""");
         while (matches > 0) {
-            if (p1move) {
-                System.out.println("Игрок 1 тянет спички:");
-            } else {
-                System.out.println("Игрок 2 тянет спички:");
-            }
+            String player = p1move ? "Игрок 1 " : "Игрок 2";
+            System.out.print(player + "тянет спички: ");
             int move = Integer.parseInt(input.nextLine());
-            if (move < 1 || move > 3) {
-                System.out.println("Введите число от 1 до 3");
+            if (move < 1 || move > Math.min(3, matches)) {
+                System.out.println("Введите число от 1 до 3 и не более остатка");
             } else {
                 matches -= move;
-                if (matches <= 0) {
-                    break;
-                }
-                System.out.println("Осталось " + matches + " спичек");
+                System.out.println("Осталось спичек: " + matches);
                 p1move = !p1move;
             }
         }
-        if (p1move) {
+        if (!p1move) {
             System.out.println("Победил Игрок 1");
         } else {
             System.out.println("Победил Игрок 2");
