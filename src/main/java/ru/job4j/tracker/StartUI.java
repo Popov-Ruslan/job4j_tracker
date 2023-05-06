@@ -20,7 +20,7 @@ public class StartUI {
             showMenu(actions);
             int select = input.askInt("Select: ");
             if (select < 0 || select >= actions.length) {
-                System.out.println("Value should be within 0 .. " + (actions.length - 1));
+                out.println("Value should be within 0 .. " + (actions.length - 1));
                 continue;
             }
             UserAction action = actions[select];
